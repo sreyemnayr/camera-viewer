@@ -41,7 +41,7 @@ document.addEventListener('readystatechange', (event) => {
 		}
 		
 
-		video.addEventListener('contextmenu',event => {
+		video.addEventListener('click',event => {
 			event.preventDefault();
 			
 			
@@ -72,11 +72,25 @@ document.addEventListener('readystatechange', (event) => {
 			}
 		});
 
-		video.addEventListener('click',event => {
-			event.preventDefault();
-			video.classList.toggle('flipped');
-		});
+		
+
+	// Depends: https://github.com/jaywcjlove/hotkeys
+	hotkeys('r,f,m,z', function (event, handler){
+		switch (handler.key) {
+		  case 'r': 
+		  case 'f':
+		  case 'm':
+		  	video.classList.toggle('flipped');
+			break;
+		  case 'z': 
+		  	video.classList.toggle('zoomed');
+			break;
+		  
+		}
+	  });
 
 	}
 
 });
+
+

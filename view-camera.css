@@ -6,10 +6,13 @@ video {
   right: 0;
   bottom: 0;
   position: fixed;
-  object-fit: cover;
+  object-fit: contain;
 }
 .flipped {
     transform: scaleX(-1);
+}
+.zoomed {
+  object-fit: cover !important;
 }
 html,body {
   margin: 0;
