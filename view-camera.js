@@ -1,7 +1,7 @@
 let cameras = [];
 let camId = 0;
 let currentStream = null;
-
+window.alert('test');
 document.addEventListener('readystatechange', (event) => {
 
 	if(document.readyState === 'complete') {
