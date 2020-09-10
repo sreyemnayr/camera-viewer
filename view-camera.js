@@ -42,7 +42,7 @@ document.addEventListener('readystatechange', (event) => {
 
 		video.addEventListener('click',event => {
 			if(location.href.includes('&debug')) {
-				console.log('clicked on video');
+				alert('clicked on video');
 				console.log(cameras);
 				console.log(camId);
 				console.log(currentStream);
