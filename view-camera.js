@@ -40,7 +40,8 @@ document.addEventListener('readystatechange', (event) => {
 		  }
 		}
 
-		video.addEventListener('click',event => {
+		video.addEventListener('touchstart',event => {
+			event.preventDefault();
 			if(location.href.includes('&debug')) {
 				alert('clicked on video');
 				console.log(cameras);
