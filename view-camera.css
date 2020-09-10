@@ -8,6 +8,9 @@ video {
   position: fixed;
   object-fit: cover;
 }
+.flipped {
+    transform: scaleX(-1);
+}
 html,body {
   margin: 0;
   padding: 0;

@@ -41,7 +41,7 @@ document.addEventListener('readystatechange', (event) => {
 		}
 		
 
-		video.addEventListener('click',event => {
+		video.addEventListener('contextmenu',event => {
 			event.preventDefault();
 			
 			
@@ -70,6 +70,11 @@ document.addEventListener('readystatechange', (event) => {
 					}).then(successCallback).catch(errorCallback);
 				}
 			}
+		});
+
+		video.addEventListener('click',event => {
+			event.preventDefault();
+			video.classList.toggle('flipped');
 		});
 
 	}
