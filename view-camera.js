@@ -6,7 +6,7 @@ document.addEventListener('readystatechange', (event) => {
 
 	if(document.readyState === 'complete') {
 
-		const video = document.querySelector('body');
+		const video = document.querySelector('video');
 
 		function successCallback(stream) {
 		  currentStream = stream;
