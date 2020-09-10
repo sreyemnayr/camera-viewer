@@ -29,9 +29,9 @@ document.addEventListener('readystatechange', (event) => {
 			if(navigator.mediaDevices.enumerateDevices) {
 				navigator.mediaDevices.enumerateDevices().then(media_devices => {
 					media_devices.forEach(media_device => {
-						if(location.href.includes('&debug')) {
+						
 							console.log(media_device);
-						}
+						
 				    if(media_device.kind === 'videoinput') {
 					   	cameras = cameras.concat(media_device.deviceId);
 						}
@@ -40,17 +40,15 @@ document.addEventListener('readystatechange', (event) => {
 		  }
 		}
 		
-		window.alert(cameras);
 
 		video.addEventListener('click',event => {
 			event.preventDefault();
-			window.alert('touched');
-			if(location.href.includes('&debug')) {
-				alert('clicked on video');
-				console.log(cameras);
-				console.log(camId);
-				console.log(currentStream);
-			}
+			
+			
+			console.log(cameras);
+			console.log(camId);
+			console.log(currentStream);
+			
 			if((camId + 1) < cameras.length) {
 				camId = camId +1;
 			} else {
