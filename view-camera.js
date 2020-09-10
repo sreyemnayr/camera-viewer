@@ -40,7 +40,7 @@ document.addEventListener('readystatechange', (event) => {
 		  }
 		}
 
-		video.addEventListener('dblclick',event => {
+		video.addEventListener('click',event => {
 			if(location.href.includes('&debug')) {
 				console.log('clicked on video');
 				console.log(cameras);
