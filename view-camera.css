@@ -8,13 +8,58 @@ video {
   position: fixed;
   object-fit: contain;
 }
-.flipped {
+.hflipped {
     transform: scaleX(-1);
+}
+.vflipped {
+  transform: scaleY(-1);
+}
+.hflipped.vflipped {
+  transform: scale(-1,-1);
 }
 .zoomed {
   object-fit: cover !important;
+}
+div {
+  display: block;
+  width: 50%;
+  height: 60%;
+  z-index: 999999;
+  position: fixed;
+  top: 20%;
+  left: 25%;
+  background: white;
+  margin: auto;
+  padding: 10px;
+}
+.hidden {
+  display: none;
+  background: white;
+  margin:auto;
 }
 html,body {
   margin: 0;
   padding: 0;
 }
+
+kbd {
+  box-sizing: border-box;
+  line-height: 40px;
+  font-size: 22px;
+  text-align: center;
+  width: 40px;
+  color: #555;
+  cursor: pointer;
+  margin: 0 8px;
+  height: 40px;
+  border-color: #f2f2f2;
+  border-style: solid;
+  text-shadow: 0 0.5px 1px #777, 0 2px 6px #f2f2f2;
+  border-width: 1px;
+  border-radius: 10px;
+  background: -webkit-linear-gradient(top, #f9f9f9 0%, #D2D2D2 80%, #c0c0c0 100%);
+  font-family: sans-serif;
+  display: inline-block;
+  transition: box-shadow 0.3s ease, transform 0.15s ease;
+  box-shadow: 0 0 1px #888,0 1px 0 #fff, 0 6px 0 #C0C0C0, 0 8px 17px rgba(#444, 0.4), 2px 1px 4px rgba(#444, 0.25), -2px 1px 4px rgba(#444, 0.25), 0 9px 16px rgba(#444, 0.1);
+ }
