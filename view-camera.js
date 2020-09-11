@@ -133,7 +133,7 @@ document.addEventListener('readystatechange', (event) => {
 		
 
 	// Depends: https://github.com/jaywcjlove/hotkeys
-	hotkeys('r,f,m,z,shift+/,h,up,down,left,right,c', function (event, handler){
+	hotkeys('r,f,m,z,shift+/,h,up,down,left,right,c,esc', function (event, handler){
 		switch (handler.key) {
 		  case 'r': 
 		  case 'm':
@@ -154,6 +154,7 @@ document.addEventListener('readystatechange', (event) => {
 			break;
 		  case 'shift+/':
 		  case 'h':
+		  case 'esc':
 			document.querySelector('#help').classList.toggle("hidden");
 			break;
 		  
