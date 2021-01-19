@@ -7,6 +7,7 @@ video {
   bottom: 0;
   position: fixed;
   object-fit: contain;
+  z-index: 9;
 }
 .hflipped {
     transform: scaleX(-1);
@@ -31,23 +32,56 @@ video {
 .zoomed {
   object-fit: cover !important;
 }
+
 div {
-  display: block;
-  width: 50%;
-  height: 60%;
   z-index: 999999;
   position: fixed;
+  display: block;
+}
+
+div.helpBox {
+  
+  width: 50%;
+  height: 60%;
+ 
   top: 20%;
   left: 25%;
   background: white;
   margin: auto;
   padding: 10px;
+  border-radius: 10px;
+
 }
-.hidden {
-  display: none;
+
+li {
+  list-style: none;
+}
+
+div#helpBtn {
+  opacity: 0.2;
+  bottom: 0px;
+  right: 0px;
+}
+
+div#helpBtn:hover {
+  opacity: 1;
+}
+
+
+#help {
+  opacity: 1;
+  transition: 0.5s linear all;
   background: white;
-  margin:auto;
+  margin: auto;
+  font-size: 16pt;
 }
+
+#help.hidden {
+  opacity: 0;
+  z-index:1;
+}
+
+
 html,body {
   margin: 0;
   padding: 0;
@@ -73,4 +107,25 @@ kbd {
   display: inline-block;
   transition: box-shadow 0.3s ease, transform 0.15s ease;
   box-shadow: 0 0 1px #888,0 1px 0 #fff, 0 6px 0 #C0C0C0, 0 8px 17px rgba(#444, 0.4), 2px 1px 4px rgba(#444, 0.25), -2px 1px 4px rgba(#444, 0.25), 0 9px 16px rgba(#444, 0.1);
+ }
+
+ kbd.wide {
+   width: auto;
+   padding-left: 8px;
+   padding-right: 8px;
+ }
+
+ kbd.right {
+   float:right;
+ }
+
+ .gesture {
+   max-height: 30px; 
+   max-width: 30px;
+   padding-left: 6px;
+   padding-right: 6px;
+ }
+
+ table {
+   white-space: nowrap;
  }

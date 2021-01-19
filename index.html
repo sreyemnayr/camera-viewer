@@ -9,17 +9,59 @@
 <link rel="stylesheet" type="text/css" href="./view-camera.css" />
 </head>
 <body>
-	<div id="help" class="hidden">
-		<h2>Hotkeys/Gestures</h2>
-		<ul>
-			<li><kbd>Z</kbd> (or pinch): Zoom in/out</li>
-			<li><kbd>R</kbd><kbd>←</kbd><kbd>→</kbd> (or swipe left/right): Reflect (mirror horizontally)</li>
-			<li><kbd>F</kbd><kbd>↑</kbd><kbd> ↓</kbd> (or swipe up/down): Flip (mirror vertically)</li>
-			<li><kbd>C</kbd> (or double-tap): Change cameras</li>
-			<li><kbd>H</kbd><kbd>?</kbd> Display help</li>
-		</ul>
+	<div id="helpBtn">
+		<kbd>?</kbd>
 	</div>
-	<video autoplay="true" playsinline="true" class="zoomed" data-rotated=0 />
-	
+	<div id="help" class="helpBox">
+		<h2>Hotkeys/Gestures <kbd class="right">?</kbd></h2>
+		<table>
+			<tr>
+				<td><kbd>Z</kbd></td>
+				<td><img class="gesture" src="/img/Pinch.png" title="Pinch" alt="Pinch"/>
+					<img class="gesture" src="/img/Zoom.png" title="Spread" alt="Spread"/></td>
+				<td> Toggle zoom-to-fill</td>
+			</tr>
+			<tr>
+				<td><kbd>M</kbd><kbd>←</kbd><kbd>→</kbd></td>
+				<td><img class="gesture" src="/img/Swipe-Left.png" title="Swipe Left" alt="Swipe Left"/>
+					<img class="gesture" src="/img/Swipe-Right.png" title="Swipe Right" alt="Swipe Right"/></td>
+				<td> Mirror (reflect horizontally)</td>
+			</tr>
+			<tr>
+				<td><kbd>F</kbd><kbd>↑</kbd><kbd>↓</kbd></td>
+				<td><img class="gesture" src="/img/Swipe-Down.png" title="Swipe Down" alt="Swipe Down"/>
+					<img class="gesture" src="/img/Swipe-Up.png" title="Swipe Up" alt="Swipe Up"/></td>
+				<td>Flip (reflect vertically)</td>
+			</tr>
+			<tr>
+				<td><kbd>R</kbd></td>
+				<td><img class="gesture" src="/img/Rotate.png" title="Rotate" alt="Rotate"/></td>
+				<td>Rotate 90&deg;</kbd></td>
+			</tr>
+			<tr>
+				<td colspan=2><kbd class="wide">Alt + Enter</kbd></td>
+				<td>Toggle fullscreen (experimental / must right-click to re-enable keyboard shortcuts)</td>
+			</tr>
+			<tr><td><kbd>C</kbd></td><td><img class="gesture" src="/img/DoubleTap.png" title="Double-Tap" alt="Double-Tap"/></td><td>Change cameras</td></tr>
+			<tr>
+				<td><kbd>P</kbd><kbd class="wide"> Space </kbd></td>
+				<td><img class="gesture" src="/img/2FingerTap.png" title="Two-finger tap" alt="Two-finger tap"/></td>
+				<td>Pause/play (aka "freeze")</td>
+			</tr>
+			<tr><td colspan=2><kbd>H</kbd><kbd>?</kbd></td><td>Display help</td></tr>
+		</table>
+		<!--<ul>
+			<li><kbd>Z</kbd>,<img class="gesture" src="/img/Pinch.png" alt="Pinch"/> Toggle zoom-to-fill</li>
+			<li><kbd>M</kbd>,<kbd>←</kbd>,<kbd>→</kbd>,<img class="gesture" src="/img/Swipe-Left.png" alt="Swipe Left"/>,<img class="gesture" src="/img/Swipe-Right.png" alt="Swipe Right"/>: Mirror (reflect horizontally)</li>
+			<li><kbd>F</kbd>,<kbd>↑</kbd>,<kbd> ↓</kbd><img class="gesture" src="/img/Swipe-Down.png" alt="Swipe Down"/>,<img class="gesture" src="/img/Swipe-Up.png" alt="Swipe Up"/>: Flip (reflect vertically)</li>
+			<li><kbd>R</kbd>,<img class="gesture" src="/img/Rotate.png" alt="Rotate"/>: Rotate 90&deg;</kbd></li>
+			<li><kbd class="wide">Alt</kbd>+<kbd class="wide">Enter</kbd>: Toggle fulscreen (experimental / must right-click to re-enable keyboard shortcuts)</li>
+			<li><kbd>C</kbd>,<img class="gesture" src="/img/DoubleTap.png" alt="Double-Tap"/>: Change cameras</li>
+			<li><kbd>P</kbd>,<kbd class="wide"> Space </kbd>,<img class="gesture" src="/img/2FingerTap.png" alt="Two-finger tap"/>: Pause/play (aka "freeze")</li>
+			<li><kbd>H</kbd><kbd>?</kbd> Display help</li>
+		</ul>-->
+	</div>
+	<video autoplay="true" playsinline="true" class="zoomed" data-rotated=0 ></video>
+
 </body>
 </html>

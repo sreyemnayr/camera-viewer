@@ -140,12 +140,15 @@ document.addEventListener('readystatechange', (event) => {
 	// Single tap recognizer
 	mc.add( new Hammer.Tap({ event: 'singletap' }) );
 
+	mc.add( new Hammer.Tap({event: 'twofingertap', pointers: 2}))
+
 
 
 	// we want to recognize this simulatenous, so a quadrupletap will be detected even while a tap has been recognized.
 	mc.get('doubletap').recognizeWith('singletap');
 	// we only want to trigger a tap, when we don't have detected a doubletap
-	mc.get('singletap').requireFailure('doubletap');
+	mc.get('singletap').requireFailure(['doubletap','twofingertap']);
+
 
 
 	mc.on("doubletap", function(ev) {
@@ -158,7 +161,7 @@ document.addEventListener('readystatechange', (event) => {
 
 	mc.on("swipeleft swiperight", function(ev) {
 		video.classList.toggle('hflipped');
-		toggleFullScreen();
+		// toggleFullScreen();
 	});
 
 	mc.on("swipeup swipedown", function(ev) {
@@ -174,17 +177,28 @@ document.addEventListener('readystatechange', (event) => {
 		video.classList.add('zoomed');
 		
 	});
+
+	mc.on("twofingertap", function(ev) {
+		if (video.paused) { video.play(); } else { video.pause(); }
+	})
+
+	mc.on("rotate", function(ev) {
+		video.classList.toggle(`rotate_${(parseInt(video.dataset.rotated) % 4) * 90}`)
+		video.dataset.rotated = parseInt(video.dataset.rotated) + 1
+		video.classList.toggle(`rotate_${(parseInt(video.dataset.rotated) % 4) * 90}`)
+		
+	});
 		
 
 	// Depends: https://github.com/jaywcjlove/hotkeys
 	hotkeys('r,f,m,z,shift+/,alt+enter,h,v,up,down,left,right,c,esc,p,space', function (event, handler){
 		switch (handler.key) {
-		  case 'h':
+		  case 'm':
 		  case 'left':
 		  case 'right':
 		  	video.classList.toggle('hflipped');
 			break;
-		  case 'f':
+		  case 'alt+enter':
 			toggleFullScreen();
 			break;
 		  case 'r':
@@ -192,7 +206,7 @@ document.addEventListener('readystatechange', (event) => {
 			video.dataset.rotated = parseInt(video.dataset.rotated) + 1
 			video.classList.toggle(`rotate_${(parseInt(video.dataset.rotated) % 4) * 90}`)
 			break;
-		  case 'v':
+		  case 'f':
 		  case 'up':
 		  case 'down':
 			video.classList.toggle('vflipped');
@@ -205,7 +219,8 @@ document.addEventListener('readystatechange', (event) => {
 			break;
 		  case 'shift+/':
 		  case 'esc':
-			document.querySelector('#help').classList.toggle("hidden");
+		  case 'h':
+			document.querySelector('#help').classList.toggle("hidden");	
 			break;
 		  case 'p':
 		  case 'space':
@@ -215,7 +230,14 @@ document.addEventListener('readystatechange', (event) => {
 		}
 	  });
 
+	  let helpBtn = document.querySelector('#helpBtn');
+	  helpBtn.onclick = function(){ document.querySelector('#help').classList.toggle("hidden");	}
+
 	}
+
+	setTimeout(function() {
+		document.querySelector('#help').classList.add("hidden");
+	}, 5000);
 
 });
 
