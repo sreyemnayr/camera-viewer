@@ -17,6 +17,17 @@ video {
 .hflipped.vflipped {
   transform: scale(-1,-1);
 }
+
+.rotate_90 {
+  transform: rotate(90deg)
+}
+.rotate_180 {
+  transform: rotate(180deg)
+}
+.rotate_270 {
+  transform: rotate(270deg)
+}
+
 .zoomed {
   object-fit: cover !important;
 }

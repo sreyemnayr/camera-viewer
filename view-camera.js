@@ -2,13 +2,18 @@ let cameras = [];
 let camId = 0;
 let currentStream = null;
 
+
+
 document.addEventListener('readystatechange', (event) => {
+
+	cameras = []
 
 	if(document.readyState === 'complete') {
 
 		const video = document.querySelector('video');
 
 		function successCallback(stream) {
+		  cameras = []
 		  currentStream = stream;
 		  video.srcObject = stream;
 		  video.play();
@@ -23,15 +28,26 @@ document.addEventListener('readystatechange', (event) => {
 					navigator.mediaDevices.enumerateDevices().then(media_devices => {
 						media_devices.forEach(media_device => {
 							
-								console.log(media_device);
+								
 							
 						if(media_device.kind === 'videoinput') {
 								cameras = cameras.concat(media_device.deviceId);
+								console.log("Media device:")
+								console.log(media_device.deviceId);
+								console.log(media_device.label);
+								console.log(media_device.kind);
 							}
 						})
+
+						console.log("Cameras: ")
+						console.log(cameras)
+						
+
 				})
+				
 				}
 			}
+			
 		
 		}
 
@@ -39,7 +55,10 @@ document.addEventListener('readystatechange', (event) => {
 			window.alert('Error: ', error);
 		}
 
-		navigator.mediaDevices.getUserMedia({ audio: false, video: true })
+		
+
+		navigator.mediaDevices.getUserMedia({ deviceId: {exact: cameras[0]}, video: {width: { ideal: 3264 },
+			height: { ideal: 1868 } } })
 		  .then(successCallback)
 		  .catch(errorCallback);
 
@@ -61,12 +80,8 @@ document.addEventListener('readystatechange', (event) => {
   				});
 					video.srcObject = null;
 					navigator.mediaDevices.getUserMedia({
-						audio: false,
-						video: {
-								deviceId: {
-									exact: cameras[camId]
-								}
-							}
+						 video: {deviceId: {exact: cameras[camId]}, width: { ideal: 3264 },
+			height: { ideal: 1868 } } 
 					}).then(successCallback).catch(errorCallback);
 				}
 			}
@@ -80,6 +95,34 @@ document.addEventListener('readystatechange', (event) => {
 			
 		});
 		*/
+
+	function toggleFullScreen(opt_elem, opt_value) {
+		var doc = document, done, wasFull;
+		opt_elem = opt_elem || doc.documentElement;
+		'-frsexit ms-FRsExit moz-FRSCancel webkit-FRsExit'.replace(
+			/(\w*)-(f)(r)(s)(\w+)/gi,
+			function(_, prefix, f, r, s, exitWord) {
+			s = 'ull' + s + 'creen';
+			if (!done && doc[prefix + f + s + 'Enabled']) {
+				// If in fullscreen mode and opt_value falsy.
+				if ((wasFull = !!doc[prefix + f + s + 'Element']) && doc[exitWord = prefix + exitWord + 'F' + s] && !opt_value) {
+				doc[done = exitWord]();
+				}
+				// If not in fullscreen mode and opt_value is truthy or opt_value is
+				// undefined or null.
+				else if (opt_elem[r = prefix + r + 'equestF' + s] && (opt_value || opt_value == null)) {
+				opt_elem[done = r](Element && Element.ALLOW_KEYBOARD_INPUT);
+				}
+			}
+			}
+		);
+		return wasFull;
+		}
+
+	function doToggleFullScreen(opt_elem, opt_value) {
+		toggleFullScreen(opt_elem, opt_value)
+		toggleFullScreen()
+	}
 
 	// Touch events
 	// Depends: https://hammerjs.github.io/
@@ -115,6 +158,7 @@ document.addEventListener('readystatechange', (event) => {
 
 	mc.on("swipeleft swiperight", function(ev) {
 		video.classList.toggle('hflipped');
+		toggleFullScreen();
 	});
 
 	mc.on("swipeup swipedown", function(ev) {
@@ -133,15 +177,22 @@ document.addEventListener('readystatechange', (event) => {
 		
 
 	// Depends: https://github.com/jaywcjlove/hotkeys
-	hotkeys('r,f,m,z,shift+/,h,up,down,left,right,c,esc', function (event, handler){
+	hotkeys('r,f,m,z,shift+/,alt+enter,h,v,up,down,left,right,c,esc,p,space', function (event, handler){
 		switch (handler.key) {
-		  case 'r': 
-		  case 'm':
+		  case 'h':
 		  case 'left':
 		  case 'right':
 		  	video.classList.toggle('hflipped');
 			break;
 		  case 'f':
+			toggleFullScreen();
+			break;
+		  case 'r':
+			video.classList.toggle(`rotate_${(parseInt(video.dataset.rotated) % 4) * 90}`)
+			video.dataset.rotated = parseInt(video.dataset.rotated) + 1
+			video.classList.toggle(`rotate_${(parseInt(video.dataset.rotated) % 4) * 90}`)
+			break;
+		  case 'v':
 		  case 'up':
 		  case 'down':
 			video.classList.toggle('vflipped');
@@ -153,9 +204,12 @@ document.addEventListener('readystatechange', (event) => {
 			swapCameras();
 			break;
 		  case 'shift+/':
-		  case 'h':
 		  case 'esc':
 			document.querySelector('#help').classList.toggle("hidden");
+			break;
+		  case 'p':
+		  case 'space':
+		  	if (video.paused) { video.play(); } else { video.pause(); }
 			break;
 		  
 		}
